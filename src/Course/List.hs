@@ -147,10 +147,11 @@ filter ::
   (a -> Bool)
   -> List a
   -> List a
-filter p Nil = Nil
-filter p (x:.xs) = case p x of
-    True -> x:.filter p xs
-    _ -> filter p xs
+filter p ll = foldRight (\x xs-> if p x then x:.xs else xs) Nil ll
+-- filter p Nil = Nil
+-- filter p (x:.xs) = case p x of
+    -- True -> x:.filter p xs
+    -- _ -> filter p xs
 
 -- | Append two lists to a new list.
 --
@@ -312,7 +313,6 @@ reverse ::
   -> List a
 -- reverse = error "todo: Is it even possible?"
 reverse = foldLeft (flip (:.)) Nil
-
 
 -- | Produce an infinite `List` that seeds with the given value at its head,
 -- then runs the given function for subsequent elements

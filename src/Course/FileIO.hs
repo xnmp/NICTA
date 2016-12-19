@@ -11,6 +11,8 @@ import Course.Monad
 import Course.Functor
 import Course.List
 
+import Prelude(print)
+
 {-
 
 Useful Functions --
@@ -73,8 +75,8 @@ the contents of c
 -- /Tip:/ use @getArgs@ and @run@
 main ::
   IO ()
-main =
-  error "todo: Course.FileIO#main"
+main = run "share/files.txt"
+  -- error "todo: Course.FileIO#main"
 
 type FilePath =
   Chars
@@ -83,31 +85,39 @@ type FilePath =
 run ::
   Chars
   -> IO ()
-run =
-  error "todo: Course.FileIO#run"
+run path = do
+  pathlist <- getFile path
+  files <- getFiles . lines . snd $ pathlist
+  printFiles files
+  -- error "todo: Course.FileIO#run"
 
 getFiles ::
   List FilePath
   -> IO (List (FilePath, Chars))
-getFiles =
-  error "todo: Course.FileIO#getFiles"
+getFiles = sequence . map getFile
+  -- error "todo: Course.FileIO#getFiles"
 
 getFile ::
   FilePath
   -> IO (FilePath, Chars)
-getFile =
-  error "todo: Course.FileIO#getFile"
+getFile path = do 
+  file <- readFile path
+  return (path, file)
+  -- error "todo: Course.FileIO#getFile"
 
 printFiles ::
   List (FilePath, Chars)
   -> IO ()
-printFiles =
-  error "todo: Course.FileIO#printFiles"
+-- printFiles Nil = putStrLn ""
+-- printFiles (f:.fs) = uncurry printFile f >> printFiles fs
+printFiles = foldRight (\a i -> uncurry printFile a >> i) (putStrLn "")
+
+  -- error "todo: Course.FileIO#printFiles"
 
 printFile ::
   FilePath
   -> Chars
   -> IO ()
-printFile =
-  error "todo: Course.FileIO#printFile"
+printFile path str = putStrLn ("======" ++ path) >> putStrLn str
+  -- error "todo: Course.FileIO#printFile"
 

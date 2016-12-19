@@ -2,34 +2,34 @@ Test suite doctests: RUNNING...
 Testing src/Course/List.hs
 Examples: 58  Tried: 58  Errors: 0  Failures: 0
 Testing src/Course/Functor.hs
-### Failure in src/Course/Functor.hs:37: expression `(+1) <$> Id 2'
+Examples: 75  Tried: 75  Errors: 0  Failures: 0
+Testing src/Course/Applicative.hs
+Examples: 140  Tried: 140  Errors: 0  Failures: 0
+Testing src/Course/Monad.hs
+### Failure in src/Course/Monad.hs:37: expression `Id (+10) <*> Id 8'
+expected: Id 18
+ but got: *** Exception: todo: Course.Monad#(>>=)
+### Failure in src/Course/Monad.hs:82: expression `(\x -> Id(x+1)) =<< Id 2'
 expected: Id 3
- but got: *** Exception: todo: Course.Functor (<$>)#instance Id
-### Failure in src/Course/Functor.hs:49: expression `(+1) <$> Nil'
-expected: []
- but got: *** Exception: todo: Course.Functor (<$>)#instance List
-### Failure in src/Course/Functor.hs:64: expression `(+1) <$> Empty'
-expected: Empty
- but got: *** Exception: todo: Course.Functor (<$>)#instance Optional
-### Failure in src/Course/Functor.hs:79: expression `((+1) <$> (*2)) 8'
-expected: 17
- but got: *** Exception: todo: Course.Functor (<$>)#((->) t)
-### Failure in src/Course/Functor.hs:91: expression `7 <$ (1 :. 2 :. 3 :. Nil)'
-expected: [7,7,7]
- but got: *** Exception: todo: Course.Functor#(<$)
-### Failure in src/Course/Functor.hs:94: expression `x <$ (a :. b :. c :. Nil) == (x :. x :. x :. Nil)'
-*** Failed! Exception: 'todo: Course.Functor#(<$)' (after 1 test): 
-0
-0
-0
-0
-### Failure in src/Course/Functor.hs:96: expression `x <$ Full q == Full x'
-*** Failed! Exception: 'todo: Course.Functor#(<$)' (after 1 test): 
-0
-0
-### Failure in src/Course/Functor.hs:107: expression `void (1 :. 2 :. 3 :. Nil)'
-expected: [(),(),()]
- but got: *** Exception: todo: Course.Functor#void
-Examples: 75  Tried: 70  Errors: 0  Failures: 8
+ but got: *** Exception: todo: Course.Monad (=<<)#instance Id
+### Failure in src/Course/Monad.hs:94: expression `(\n -> n :. n :. Nil) =<< (1 :. 2 :. 3 :. Nil)'
+expected: [1,1,2,2,3,3]
+ but got: *** Exception: todo: Course.Monad (=<<)#instance List
+### Failure in src/Course/Monad.hs:106: expression `(\n -> Full (n + n)) =<< Full 7'
+expected: Full 14
+ but got: *** Exception: todo: Course.Monad (=<<)#instance Optional
+### Failure in src/Course/Monad.hs:118: expression `((*) =<< (+10)) 7'
+expected: 119
+ but got: *** Exception: todo: Course.Monad (=<<)#instance ((->) t)
+### Failure in src/Course/Monad.hs:130: expression `join ((1 :. 2 :. 3 :. Nil) :. (1 :. 2 :. Nil) :. Nil)'
+expected: [1,2,3,1,2]
+ but got: *** Exception: todo: Course.Monad#join
+### Failure in src/Course/Monad.hs:152: expression `((+10) >>= (*)) 7'
+expected: 119
+ but got: *** Exception: todo: Course.Monad#(>>=)
+### Failure in src/Course/Monad.hs:167: expression `((\n -> n :. n :. Nil) <=< (\n -> n+1 :. n+2 :. Nil)) 1'
+expected: [2,2,3,3]
+ but got: *** Exception: todo: Course.Monad#(<=<)
+Examples: 160  Tried: 148  Errors: 0  Failures: 8
 Test suite doctests: FAIL
 Test suite logged to: dist/test/course-0.1.4-doctests.log
